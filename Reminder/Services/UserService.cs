@@ -50,6 +50,23 @@ namespace Reminder.Services
             return false;
         }
 
+        public UserDto Login(LoginDto data)
+        {
+            var account = dbContext.Accounts.SingleOrDefault(x => x.Login == data.Login);
+            if (account == null)
+            {
+                return null;
+            }
+
+            var hash = GetHash(data.Password);
+            if (account.Password == hash)
+            {
+                return new(account.Login, "empty token");
+            }
+
+            return null;
+        }
+
         private string GetHash(string password)
         {
             var algorythm = SHA256.Create();

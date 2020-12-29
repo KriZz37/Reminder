@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Reminder.Dtos;
 using Reminder.Services;
 using System;
 using System.Collections.Generic;
@@ -19,5 +20,10 @@ namespace Reminder.Controllers
             this.userService = userService;
         }
 
+        [HttpPost]
+        public UserDto Login(LoginDto data)
+        {
+            return userService.Login(data);
+        }
     }
 }
