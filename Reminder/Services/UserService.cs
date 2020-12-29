@@ -1,8 +1,12 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Reminder.Dtos;
+using Reminder.Entities;
 using Reminder.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Reminder.Services
@@ -19,5 +23,36 @@ namespace Reminder.Services
             this.configuration = configuration;
         }
 
+        public bool Register(RegisterDto data)
+        {
+            var loginExists = dbContext.Accounts.Any(x => x.Login == data.Login);
+            if (loginExists)
+            {
+                return true;
+            }
+
+            var newUser = new Account
+            {
+                Login = data.Login,
+                Password = GetHash(data.Password)
+            };
+
+            dbContext.Accounts.Add(newUser);
+            dbContext.SaveChanges();
+            return false;
+        }
+
+        private string GetHash(string password)
+        {
+            var algorythm = SHA256.Create();
+
+            StringBuilder sb = new StringBuilder();
+            foreach (var b in algorythm.ComputeHash(Encoding.UTF8.GetBytes(password)))
+            {
+                sb.Append(b.ToString("X2"));
+            }
+
+            return sb.ToString();
+        }
     }
 }
