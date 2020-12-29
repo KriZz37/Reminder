@@ -23,9 +23,9 @@ namespace Reminder.Controllers
         [HttpPost]
         public bool Register(RegisterDto data)
         {
-            var loginExists = userService.Register(data);
+            var registerError = userService.Register(data);
 
-            return loginExists;
+            return registerError;
         }
     }
 }

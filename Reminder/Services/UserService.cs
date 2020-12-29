@@ -25,6 +25,14 @@ namespace Reminder.Services
 
         public bool Register(RegisterDto data)
         {
+            var login = data.Login.Trim().ToLower();
+            var password = data.Password;
+
+            if (login.Length < 4 || password.Length < 4 || login.Contains(' '))
+            {
+                return true;
+            }
+
             var loginExists = dbContext.Accounts.Any(x => x.Login == data.Login);
             if (loginExists)
             {
@@ -33,8 +41,8 @@ namespace Reminder.Services
 
             var newUser = new Account
             {
-                Login = data.Login,
-                Password = GetHash(data.Password)
+                Login = login,
+                Password = GetHash(password)
             };
 
             dbContext.Accounts.Add(newUser);

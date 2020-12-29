@@ -11,8 +11,8 @@ import { RegisterService } from './register.service';
 })
 export class RegisterComponent implements OnInit {
   form: FormGroup;
-  registerError: boolean;
-  emptyInput: boolean;
+  loginExists: boolean;
+  inputError: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -27,19 +27,19 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(value: Register): void {
-    this.registerError = false;
-    this.emptyInput = false;
+    this.loginExists = false;
+    this.inputError = false;
 
-    if (value.login !== '' && value.password !== '') {
+    if (value.login.length < 4 || value.password.length < 4 || /\s/.test(value.login)) {
+      this.inputError = true;
+    } else {
       this.registerService.register(value).subscribe(x => {
         if (x === false) {
           this.router.navigate(['/login']);
         } else {
-          this.registerError = true;
+          this.loginExists = true;
         }
       });
-    } else {
-      this.emptyInput = true;
     }
   }
 

@@ -10,8 +10,8 @@
             <mat-form-field>
                 <input matInput placeholder="Hasło" type="password" formControlName="password">
             </mat-form-field>
-            <span *ngIf="registerError">Podany login już istnieje</span>
-            <span *ngIf="emptyInput">Pola nie mogą być puste</span>
+            <span *ngIf="loginExists">Podany login już istnieje</span>
+            <span *ngIf="inputError">Login i hasło muszą składać się z minimum 4 znaków, login nie może zawierać spacji</span>
         </mat-card-content>
         <mat-card-actions>
             <button type="submit" mat-raised-button color="primary">Zarejestruj</button>
