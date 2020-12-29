@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Reminder.Model;
+using Reminder.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +38,9 @@ namespace Reminder
 
             services.AddDbContext<ReminderDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("ReminderConnection")));
+
+            services.AddTransient<ReminderService>();
+            services.AddTransient<UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
