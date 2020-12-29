@@ -12,7 +12,7 @@ import { RegisterService } from './register.service';
 export class RegisterComponent implements OnInit {
   form: FormGroup;
   loginExists: boolean;
-  inputError: boolean;
+  inputError = false;
 
   constructor(
     private fb: FormBuilder,
