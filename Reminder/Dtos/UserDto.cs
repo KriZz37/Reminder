@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 namespace Reminder.Dtos
 {
     public record UserDto(
-        string Login,
+        long UserId,
         string Token);
 }

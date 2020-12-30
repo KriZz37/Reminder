@@ -61,7 +61,7 @@ namespace Reminder.Services
             var hash = GetHash(data.Password);
             if (account.Password == hash)
             {
-                return new(account.Login, "empty token");
+                return new(account.Id, "empty token");
             }
 
             return null;

@@ -28,8 +28,10 @@ export class LoginComponent implements OnInit {
   onSubmit(value: Login): void {
     this.inputError = false;
 
-    this.loginService.login(value).subscribe(x => {
-      if (x) {
+    this.loginService.login(value).subscribe(user => {
+      if (user) {
+        localStorage.setItem('userId', user.userId.toString());
+        localStorage.setItem('token', user.token);
         this.router.navigate(['/']);
       } else {
         this.inputError = true;

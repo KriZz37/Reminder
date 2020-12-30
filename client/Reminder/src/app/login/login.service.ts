@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Login } from './login';
 import { User } from './User';
 
@@ -19,6 +20,8 @@ export class LoginService {
   }
 
   logout(): void {
+    localStorage.removeItem('userId');
+    localStorage.removeItem('token');
     this.router.navigate(['/login']);
   }
 

@@ -16,13 +16,15 @@ import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
+import { NewReminderComponent } from './reminders/new-reminder/new-reminder.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
     LoginComponent,
-    SidenavComponent
+    SidenavComponent,
+    NewReminderComponent
   ],
   imports: [
     BrowserModule,
