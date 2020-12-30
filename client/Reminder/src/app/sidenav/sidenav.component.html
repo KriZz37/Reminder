@@ -1,0 +1,19 @@
+<mat-sidenav-container>
+  <mat-sidenav mode="side" opened>
+    <h2 class="mat-title">Reminder</h2>
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="['/']">Strona główna</a>
+      <a mat-list-item [routerLink]="['/new-reminder']">Nowe przypomnienie</a>
+    </mat-nav-list>
+    <mat-divider></mat-divider>
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="['/account']">Moje konto</a>
+      <a mat-list-item (click)="logout()">Wyloguj</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-card class="content">
+      <router-outlet></router-outlet>
+    </mat-card>
+  </mat-sidenav-content>
+</mat-sidenav-container>
