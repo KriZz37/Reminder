@@ -1,0 +1,7 @@
+.tile {
+    width: 50%;
+    height: auto;
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: top;
+}

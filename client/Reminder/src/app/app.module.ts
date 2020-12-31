@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatListModule } from '@angular/material/list';
+import { MatTableModule } from '@angular/material/table';
 
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -17,6 +18,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { NewReminderComponent } from './reminders/new-reminder/new-reminder.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ReminderListComponent } from './dashboard/reminder-list/reminder-list.component';
+import { CommentListComponent } from './dashboard/comment-list/comment-list.component';
+import { ReminderOptionsComponent } from './dashboard/reminder-options/reminder-options.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +29,11 @@ import { NewReminderComponent } from './reminders/new-reminder/new-reminder.comp
     RegisterComponent,
     LoginComponent,
     SidenavComponent,
-    NewReminderComponent
+    NewReminderComponent,
+    DashboardComponent,
+    ReminderListComponent,
+    CommentListComponent,
+    ReminderOptionsComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +46,8 @@ import { NewReminderComponent } from './reminders/new-reminder/new-reminder.comp
     BrowserAnimationsModule,
     MatButtonModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

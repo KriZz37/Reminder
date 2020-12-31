@@ -1,16 +1,16 @@
-  <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
-    <mat-card-header>
-      <mat-card-title>Nowe przypomnienie</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <mat-form-field>
-        <input matInput placeholder="Nazwa" formControlName="name" type="text">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Data (dd-MM-yyy)" formControlName="date" type="text">
-      </mat-form-field>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-raised-button color="primary">Dodaj</button>
-    </mat-card-actions>
-  </form>
+<form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+  <mat-card-header>
+    <mat-card-title>Nowe przypomnienie</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-form-field>
+      <input matInput placeholder="Nazwa" formControlName="name" type="text">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Data (dd-MM-yyy)" formControlName="date" type="text">
+    </mat-form-field>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary">Dodaj</button>
+  </mat-card-actions>
+</form>

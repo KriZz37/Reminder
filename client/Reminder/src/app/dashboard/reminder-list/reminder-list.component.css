@@ -1,0 +1,12 @@
+table {
+    width: 100%;
+}
+
+.mat-card-header {
+    display: unset;
+}
+
+.mat-row:hover {
+    background-color: rgb(231, 231, 231);
+    cursor: pointer;
+  }

@@ -25,5 +25,11 @@ namespace Reminder.Controllers
         {
             return reminderService.Create(data);
         }
+
+        [HttpGet("{accountId}")]
+        public IEnumerable<ReminderDto> GetAll(long accountId)
+        {
+            return reminderService.GetAllReminders(accountId);
+        }
     }
 }

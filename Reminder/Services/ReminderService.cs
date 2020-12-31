@@ -38,5 +38,14 @@ namespace Reminder.Services
 
             return -1;
         }
+
+        public IEnumerable<ReminderDto> GetAllReminders(long accountId)
+        {
+            return dbContext.Reminders.Where(x => x.AccountId == accountId)
+                .ToList().OrderBy(x => x.Date).Select(r => new ReminderDto(
+                    r.Name,
+                    r.Date.ToString("dd-MM-yyyy"),
+                    r.Comments.Count));
+        }
     }
 }
