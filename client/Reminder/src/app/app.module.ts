@@ -9,6 +9,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -17,12 +18,13 @@ import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
-import { NewReminderComponent } from './reminders/new-reminder/new-reminder.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReminderListComponent } from './dashboard/reminder-list/reminder-list.component';
 import { CommentListComponent } from './dashboard/comment-list/comment-list.component';
 import { ReminderOptionsComponent } from './dashboard/reminder-options/reminder-options.component';
 import { AccountComponent } from './account/account.component';
+import { NewReminderComponent } from './new-reminder/new-reminder.component';
+import { NewCommentDialogComponent } from './dashboard/new-comment-dialog/new-comment-dialog.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,11 @@ import { AccountComponent } from './account/account.component';
     ReminderListComponent,
     CommentListComponent,
     ReminderOptionsComponent,
-    AccountComponent
+    AccountComponent,
+    NewCommentDialogComponent
+  ],
+  entryComponents: [
+    NewCommentDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +56,7 @@ import { AccountComponent } from './account/account.component';
     MatSidenavModule,
     MatListModule,
     MatTableModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

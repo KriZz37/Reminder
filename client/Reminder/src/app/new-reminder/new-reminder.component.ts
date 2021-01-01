@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ReminderService } from '../reminder.service';
 import { NewReminder } from './new-reminder';
+import { ReminderService } from './reminder.service';
 
 @Component({
   selector: 'app-new-reminder',

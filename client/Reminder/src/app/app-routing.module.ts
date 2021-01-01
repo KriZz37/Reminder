@@ -4,7 +4,7 @@ import { AccountComponent } from './account/account.component';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
-import { NewReminderComponent } from './reminders/new-reminder/new-reminder.component';
+import { NewReminderComponent } from './new-reminder/new-reminder.component';
 import { RegisterComponent } from './register/register.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 

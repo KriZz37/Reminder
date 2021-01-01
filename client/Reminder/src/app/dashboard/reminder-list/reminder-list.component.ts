@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { ReminderService } from 'src/app/reminders/reminder.service';
+import { ReminderService } from 'src/app/new-reminder/reminder.service';
 import { CommentListComponent } from '../comment-list/comment-list.component';
+import { DataTransferService } from '../data-transfer.service';
 import { Reminder } from './reminder';
 
 @Component({
@@ -13,7 +14,9 @@ export class ReminderListComponent implements OnInit {
   displayedColumns = ['name', 'commentCount', 'date'];
   reminders: MatTableDataSource<Reminder>;
 
-  constructor(private reminderService: ReminderService) { }
+  constructor(
+    private reminderService: ReminderService,
+    private data: DataTransferService) { }
 
   ngOnInit(): void {
     const accountId = localStorage.getItem('userId');
@@ -30,6 +33,10 @@ export class ReminderListComponent implements OnInit {
 
     return `${String(today.getDate()).padStart(2, '0')}-${String(today.getMonth() + 1)
       .padStart(2, '0')}-${String(today.getFullYear())}`;
+  }
+
+  sendId(value: number): void {
+    this.data.changeMessage(value);
   }
 
 }

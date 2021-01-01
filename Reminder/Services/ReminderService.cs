@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Reminder.Dtos;
+using Reminder.Entities;
 using Reminder.Model;
 using System;
 using System.Collections.Generic;
@@ -45,7 +46,40 @@ namespace Reminder.Services
                 .ToList().OrderBy(x => x.Date).Select(r => new ReminderDto(
                     r.Name,
                     r.Date.ToString("dd-MM-yyyy"),
-                    r.Comments.Count));
+                    r.Comments.Count,
+                    r.Id));
+        }
+
+        public IEnumerable<CommentDto> GetReminderComments(long reminderId)
+        {
+            return dbContext.Comments.Where(x => x.ReminderId == reminderId)
+                .ToList().Select(c => new CommentDto(
+                    c.Id,
+                    c.Message));
+        }
+
+        public void CreateReminderComment(NewCommentDto data)
+        {
+            var reminder = dbContext.Reminders.SingleOrDefault(x => x.Id == data.ReminderId);
+
+            if (reminder != null)
+            {
+                var newComment = new ReminderComment
+                {
+                    Message = data.Message
+                };
+
+                reminder.Comments.Add(newComment);
+                dbContext.SaveChanges();
+            }
+        }
+
+        public void DeleteComment(long commentId)
+        {
+            var comment = dbContext.Comments.SingleOrDefault(x => x.Id == commentId);
+
+            dbContext.Comments.Remove(comment);
+            dbContext.SaveChanges();
         }
     }
 }

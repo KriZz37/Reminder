@@ -5,9 +5,7 @@ using System.Threading.Tasks;
 
 namespace Reminder.Dtos
 {
-    public record ReminderDto(
-        string Name,
-        string Date,
-        int CommentCount,
+    public record NewCommentDto(
+        string Message,
         long ReminderId);
 }

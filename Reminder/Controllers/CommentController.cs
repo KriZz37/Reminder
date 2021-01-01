@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Reminder.Dtos;
 using Reminder.Services;
 using System;
 using System.Collections.Generic;
@@ -19,5 +20,22 @@ namespace Reminder.Controllers
             this.reminderService = reminderService;
         }
 
+        [HttpGet("{reminderId}")]
+        public IEnumerable<CommentDto> Get(long reminderId)
+        {
+            return reminderService.GetReminderComments(reminderId);
+        }
+
+        [HttpPost]
+        public void Create(NewCommentDto data)
+        {
+            reminderService.CreateReminderComment(data);
+        }
+
+        [HttpDelete("{commentId}")]
+        public void Delete(long commentId)
+        {
+            reminderService.DeleteComment(commentId);
+        }
     }
 }
