@@ -1,1 +1,28 @@
-<p>account works!</p>
+<form [formGroup]="form" (submit)="onSubmit(form.value)">
+    <mat-card class="tile">
+        <mat-card-header>
+            <mat-card-title>Zmiana hasła</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-form-field>
+                <input matInput placeholder="Obecne hasło" type="password" formControlName="currentPassword">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Nowe hasło" type="password" formControlName="newPassword">
+            </mat-form-field>
+            <span *ngIf="passwordChanged">Hasło zmienione</span>
+            <span *ngIf="passwordChanged === false">Podane obecne hasło jest błędne</span>
+        </mat-card-content>
+        <mat-card-actions>
+            <button type="submit" mat-raised-button color="primary">Zmień hasło</button>
+        </mat-card-actions>
+    </mat-card>
+</form>
+<mat-card class="tile" style="margin-top: 30px;">
+    <mat-card-header>
+        <mat-card-title>Usuń konto</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        test
+    </mat-card-content>
+</mat-card>

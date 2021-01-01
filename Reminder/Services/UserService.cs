@@ -67,6 +67,26 @@ namespace Reminder.Services
             return null;
         }
 
+        public bool ChangePassword(PasswordDto data)
+        {
+            var account = dbContext.Accounts.SingleOrDefault(x => x.Id == data.AccountId);
+
+            if (account != null)
+            {
+                var dbPassword = account.Password;
+                var currentPassword = GetHash(data.CurrentPassword);
+
+                if (dbPassword == currentPassword)
+                {
+                    account.Password = GetHash(data.NewPassword);
+                    dbContext.SaveChanges();
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         private string GetHash(string password)
         {
             var algorythm = SHA256.Create();

@@ -22,6 +22,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReminderListComponent } from './dashboard/reminder-list/reminder-list.component';
 import { CommentListComponent } from './dashboard/comment-list/comment-list.component';
 import { ReminderOptionsComponent } from './dashboard/reminder-options/reminder-options.component';
+import { AccountComponent } from './account/account.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ReminderOptionsComponent } from './dashboard/reminder-options/reminder-
     DashboardComponent,
     ReminderListComponent,
     CommentListComponent,
-    ReminderOptionsComponent
+    ReminderOptionsComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,
