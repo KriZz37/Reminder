@@ -5,3 +5,7 @@ mat-card-content * {
 .tile {
     width: 500px;
 }
+
+button {
+    margin-top: 10px;
+}

@@ -50,6 +50,17 @@ namespace Reminder.Services
             return false;
         }
 
+        public void removeAccount(long accountId)
+        {
+            var account = dbContext.Accounts.SingleOrDefault(x => x.Id == accountId);
+
+            if (account != null)
+            {
+                dbContext.Accounts.Remove(account);
+                dbContext.SaveChanges();
+            }
+        }
+
         public UserDto Login(LoginDto data)
         {
             var account = dbContext.Accounts.SingleOrDefault(x => x.Login == data.Login);

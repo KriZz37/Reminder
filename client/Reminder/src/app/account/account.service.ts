@@ -13,4 +13,8 @@ export class AccountService {
   changePassword(value: ChangePassword): Observable<any> {
     return this.http.put<any>('https://localhost:5001/api/account/password', value);
   }
+
+  deleteAccount(id: number): Observable<any> {
+    return this.http.delete<any>(`https://localhost:5001/api/account/${id}`);
+  }
 }

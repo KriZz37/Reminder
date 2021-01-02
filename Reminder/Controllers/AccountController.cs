@@ -27,5 +27,11 @@ namespace Reminder.Controllers
 
             return passwordChanged;
         }
+
+        [HttpDelete("{id}")]
+        public void Delete(long id)
+        {
+            userService.removeAccount(id);
+        }
     }
 }
