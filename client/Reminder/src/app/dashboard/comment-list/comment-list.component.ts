@@ -4,8 +4,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ReminderService } from 'src/app/new-reminder/reminder.service';
 import { DataTransferService } from '../data-transfer.service';
 import { NewCommentDialogComponent } from '../new-comment-dialog/new-comment-dialog.component';
+import { Reminder } from '../reminder-list/reminder';
 import { Comment } from './comment';
-import { NewComment } from '../new-comment-dialog/new-comment';
 
 @Component({
   selector: 'app-comment-list',
@@ -15,7 +15,7 @@ import { NewComment } from '../new-comment-dialog/new-comment';
 export class CommentListComponent implements OnInit {
   comments: MatTableDataSource<Comment>;
   displayedColumns = ['message', 'delete'];
-  reminderId: number;
+  reminder: Reminder;
 
   constructor(
     private data: DataTransferService,
@@ -23,9 +23,9 @@ export class CommentListComponent implements OnInit {
     private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.data.currentReminderId.subscribe(reminderId => {
-      this.reminderId = reminderId;
-      this.updateCommentList(this.reminderId);
+    this.data.currentReminderDetails.subscribe(r => {
+      this.reminder = r;
+      this.updateCommentList(this.reminder.reminderId);
     });
   }
 
@@ -37,7 +37,7 @@ export class CommentListComponent implements OnInit {
 
   removeComment(commentId: number): void {
     this.reminderService.deleteComment(commentId).subscribe(() => {
-      this.updateCommentList(this.reminderId);
+      this.updateCommentList(this.reminder.reminderId);
     });
   }
 
@@ -45,11 +45,11 @@ export class CommentListComponent implements OnInit {
     const dialogRef = this.dialog.open(NewCommentDialogComponent, {
       width: '500px',
       height: '250px',
-      data: this.reminderId
+      data: this.reminder.reminderId
     });
 
     dialogRef.afterClosed().subscribe(() => {
-      this.updateCommentList(this.reminderId);
+      this.updateCommentList(this.reminder.reminderId);
     });
   }
 

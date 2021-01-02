@@ -18,6 +18,14 @@ export class ReminderService {
     return this.http.post<number>('https://localhost:5001/api/reminder', value);
   }
 
+  removeReminder(reminderId: number): Observable<any> {
+    return this.http.delete<any>(`https://localhost:5001/api/reminder/${reminderId}`);
+  }
+
+  editReminder(reminder: Reminder): Observable<any> {
+    return this.http.put<any>('https://localhost:5001/api/reminder', reminder);
+  }
+
   getAllReminders(accountId: number): Observable<Reminder[]> {
     return this.http.get<Reminder[]>(`https://localhost:5001/api/reminder/${accountId}`);
   }

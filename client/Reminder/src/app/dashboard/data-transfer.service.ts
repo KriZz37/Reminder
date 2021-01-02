@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { Reminder } from './reminder-list/reminder';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataTransferService {
-  private reminderIdSource = new BehaviorSubject<number>(0);
-  currentReminderId = this.reminderIdSource.asObservable();
+  private reminderDetailsSource = new BehaviorSubject<Reminder>(new Reminder());
+  currentReminderDetails = this.reminderDetailsSource.asObservable();
 
   constructor() { }
 
-  changeMessage(reminderId: number): void {
-    this.reminderIdSource.next(reminderId);
+  changeReminderDetails(reminder: Reminder): void {
+    this.reminderDetailsSource.next(reminder);
   }
 }

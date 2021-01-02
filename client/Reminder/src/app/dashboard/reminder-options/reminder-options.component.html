@@ -1,6 +1,8 @@
 <mat-card-header>
     <mat-card-title>Opcje</mat-card-title>
+    reminder id: {{reminderDetails.reminderId}}
 </mat-card-header>
 <mat-card-content>
-    reminder id: {{reminderId}}
+    <button mat-raised-button color="warn" (click)="removeReminder()">Usuń</button>
+    <button mat-raised-button color="primary" (click)="editReminder()">Edytuj</button>
 </mat-card-content>

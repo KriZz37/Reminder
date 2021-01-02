@@ -31,5 +31,17 @@ namespace Reminder.Controllers
         {
             return reminderService.GetAllReminders(accountId);
         }
+
+        [HttpDelete("{reminderId}")]
+        public void Delete(long reminderId)
+        {
+            reminderService.RemoveReminder(reminderId);
+        }
+
+        [HttpPut]
+        public void Edit(ReminderDto data)
+        {
+            reminderService.EditReminder(data);
+        }
     }
 }

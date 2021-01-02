@@ -40,9 +40,32 @@ namespace Reminder.Services
             return -1;
         }
 
+        public void RemoveReminder(long reminderId)
+        {
+            var reminder = dbContext.Reminders.SingleOrDefault(x => x.Id == reminderId);
+
+            if (reminder != null)
+            {
+                dbContext.Reminders.Remove(reminder);
+                dbContext.SaveChanges();
+            }
+        }
+
+        public void EditReminder(ReminderDto data)
+        {
+            var reminder = dbContext.Reminders.SingleOrDefault(x => x.Id == data.ReminderId);
+
+            if (reminder != null)
+            {
+                reminder.Name = data.Name;
+                reminder.Date = DateTime.ParseExact(data.Date, "dd-MM-yyyy", null);
+                dbContext.SaveChanges();
+            }
+        }
+
         public IEnumerable<ReminderDto> GetAllReminders(long accountId)
         {
-            return dbContext.Reminders.Where(x => x.AccountId == accountId)
+            return dbContext.Reminders.Include(x => x.Comments).Where(x => x.AccountId == accountId)
                 .ToList().OrderBy(x => x.Date).Select(r => new ReminderDto(
                     r.Name,
                     r.Date.ToString("dd-MM-yyyy"),
@@ -78,8 +101,11 @@ namespace Reminder.Services
         {
             var comment = dbContext.Comments.SingleOrDefault(x => x.Id == commentId);
 
-            dbContext.Comments.Remove(comment);
-            dbContext.SaveChanges();
+            if (comment != null)
+            {
+                dbContext.Comments.Remove(comment);
+                dbContext.SaveChanges();
+            }
         }
     }
 }

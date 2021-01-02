@@ -35,8 +35,8 @@ export class ReminderListComponent implements OnInit {
       .padStart(2, '0')}-${String(today.getFullYear())}`;
   }
 
-  sendId(value: number): void {
-    this.data.changeMessage(value);
+  sendId(value: Reminder): void {
+    this.data.changeReminderDetails(value);
   }
 
 }

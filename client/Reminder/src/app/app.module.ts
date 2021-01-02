@@ -25,6 +25,7 @@ import { ReminderOptionsComponent } from './dashboard/reminder-options/reminder-
 import { AccountComponent } from './account/account.component';
 import { NewReminderComponent } from './new-reminder/new-reminder.component';
 import { NewCommentDialogComponent } from './dashboard/new-comment-dialog/new-comment-dialog.component';
+import { EditReminderDialogComponent } from './dashboard/edit-reminder-dialog/edit-reminder-dialog.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { NewCommentDialogComponent } from './dashboard/new-comment-dialog/new-co
     CommentListComponent,
     ReminderOptionsComponent,
     AccountComponent,
-    NewCommentDialogComponent
+    NewCommentDialogComponent,
+    EditReminderDialogComponent
   ],
   entryComponents: [
     NewCommentDialogComponent,

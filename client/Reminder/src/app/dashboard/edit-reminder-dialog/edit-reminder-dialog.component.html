@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Edytuj przypomnienie</h1>
+<mat-dialog-content>
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+        <mat-form-field>
+            <input matInput placeholder="Nazwa" formControlName="name">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Data" formControlName="date">
+        </mat-form-field>
+        <div>
+            <button mat-raised-button color="secondary" type="button" (click)="cancel()">Anuluj</button>
+            <button mat-raised-button color="primary" style="float: right;">Edytuj</button>
+        </div>
+    </form>
+</mat-dialog-content>
