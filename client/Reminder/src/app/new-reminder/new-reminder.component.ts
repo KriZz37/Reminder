@@ -11,6 +11,7 @@ import { ReminderService } from './reminder.service';
 })
 export class NewReminderComponent implements OnInit {
   form: FormGroup;
+  error: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -25,11 +26,16 @@ export class NewReminderComponent implements OnInit {
   }
 
   onSubmit(value: NewReminder): void {
+    this.error = false;
     const accountId = localStorage.getItem('userId');
     value.accountId = accountId != null ? Number(accountId) : 0;
 
-    this.reminderService.createReminder(value).subscribe(() => {
-      this.router.navigate(['/']);
+    this.reminderService.createReminder(value).subscribe(x => {
+      if (x === -1) {
+        this.error = true;
+      } else {
+        this.router.navigate(['/']);
+      }
     });
   }
 

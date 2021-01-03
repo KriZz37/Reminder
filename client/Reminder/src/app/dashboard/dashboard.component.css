@@ -5,3 +5,15 @@
     display: inline-block;
     vertical-align: top;
 }
+
+#text {
+    margin: auto;
+    text-align: center;
+    letter-spacing: 1px;
+    font-size: large;
+    color: rgb(138, 138, 138);
+    width: 50%;
+    border: 1px solid rgb(231, 231, 231);
+    border-radius: 15px;
+    padding: 40px;
+}

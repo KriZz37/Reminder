@@ -10,6 +10,7 @@
       <input matInput placeholder="Data (dd-MM-yyy)" formControlName="date" type="text">
     </mat-form-field>
   </mat-card-content>
+  <span *ngIf="error">Nie można utworzyć przypomnienia</span>
   <mat-card-actions>
     <button mat-raised-button color="primary">Dodaj</button>
   </mat-card-actions>

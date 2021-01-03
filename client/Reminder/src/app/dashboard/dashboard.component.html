@@ -7,12 +7,15 @@
     <mat-card class="tile">
         <app-reminder-list></app-reminder-list>
     </mat-card>
-    <div class="tile">
+    <div class="tile" *ngIf="showDetails">
         <mat-card>
             <app-reminder-options></app-reminder-options>
         </mat-card>
         <mat-card>
             <app-comment-list></app-comment-list>
         </mat-card>
+    </div>
+    <div class="tile" *ngIf="showDetails == false">
+        <div id="text">Kliknij na przypomnienie, aby wyświetlić szczegóły</div>
     </div>
 </mat-card-content>
