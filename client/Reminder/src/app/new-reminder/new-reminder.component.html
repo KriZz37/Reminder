@@ -1,17 +1,21 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
-  <mat-card-header>
-    <mat-card-title>Nowe przypomnienie</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <mat-form-field>
-      <input matInput placeholder="Nazwa" formControlName="name" type="text">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Data (dd-MM-yyy)" formControlName="date" type="text">
-    </mat-form-field>
-  </mat-card-content>
-  <span *ngIf="error">Nie można utworzyć przypomnienia</span>
-  <mat-card-actions>
-    <button mat-raised-button color="primary">Dodaj</button>
-  </mat-card-actions>
+  <div id="card">
+    <mat-card-header>
+      <mat-card-title>Nowe przypomnienie</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field>
+        <input matInput placeholder="Nazwa" formControlName="name" type="text">
+      </mat-form-field>
+      <mat-form-field>
+        <input [disabled]="true" matInput [matDatepicker]="picker" placeholder="Data" formControlName="date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker [disabled]="false" #picker></mat-datepicker>
+      </mat-form-field>
+    </mat-card-content>
+    <span *ngIf="error">Nie można utworzyć przypomnienia</span>
+    <mat-card-actions>
+      <button mat-raised-button color="primary">Dodaj</button>
+    </mat-card-actions>
+  </div>
 </form>

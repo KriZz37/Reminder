@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
@@ -10,6 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -26,6 +27,8 @@ import { AccountComponent } from './account/account.component';
 import { NewReminderComponent } from './new-reminder/new-reminder.component';
 import { NewCommentDialogComponent } from './dashboard/new-comment-dialog/new-comment-dialog.component';
 import { EditReminderDialogComponent } from './dashboard/edit-reminder-dialog/edit-reminder-dialog.component';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -59,8 +62,14 @@ import { EditReminderDialogComponent } from './dashboard/edit-reminder-dialog/ed
     MatListModule,
     MatTableModule,
     MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
-  providers: [],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'en-GB' },
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
+    DatePipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

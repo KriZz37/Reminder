@@ -1,7 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ReminderService } from 'src/app/new-reminder/reminder.service';
-import { CommentListComponent } from '../comment-list/comment-list.component';
 import { DataTransferService } from '../data-transfer.service';
 import { Reminder } from './reminder';
 
@@ -13,22 +12,52 @@ import { Reminder } from './reminder';
 export class ReminderListComponent implements OnInit {
   displayedColumns = ['name', 'commentCount', 'date'];
   reminders: MatTableDataSource<Reminder>;
+  showAll: boolean;
+  accountId: number;
 
   constructor(
     private reminderService: ReminderService,
     private data: DataTransferService) { }
 
   ngOnInit(): void {
-    const accountId = localStorage.getItem('userId');
+    this.accountId = Number(localStorage.getItem('userId'));
 
-    if (accountId) {
-      this.reminderService.getAllReminders(Number(accountId)).subscribe(x => {
-        this.reminders = new MatTableDataSource(x);
-      });
+    this.showAll = false;
+    this.getNextMonthReminders();
+  }
+
+  changeView(): void {
+    if (this.showAll === false) {
+      this.showAll = true;
+      this.getAllReminders();
+    } else {
+      this.showAll = false;
+      this.getNextMonthReminders();
     }
   }
 
-  getDate(): string {
+  getAllReminders(): void {
+    this.reminderService.getAllReminders(this.accountId).subscribe(x => {
+      this.reminders = new MatTableDataSource(x);
+    });
+  }
+
+  getNextMonthReminders(): void {
+    this.reminderService.getRemindersBetween(this.getTodayDate(), this.getMonthLaterDate(), this.accountId)
+      .subscribe(x => {
+        this.reminders = new MatTableDataSource(x);
+      });
+  }
+
+  getMonthLaterDate(): string {
+    const today = new Date();
+    today.setDate(today.getDate() + 31);
+
+    return `${String(today.getDate()).padStart(2, '0')}-${String(today.getMonth() + 1)
+      .padStart(2, '0')}-${String(today.getFullYear())}`;
+  }
+
+  getTodayDate(): string {
     const today = new Date();
 
     return `${String(today.getDate()).padStart(2, '0')}-${String(today.getMonth() + 1)

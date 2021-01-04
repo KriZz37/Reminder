@@ -32,6 +32,12 @@ namespace Reminder.Controllers
             return reminderService.GetAllReminders(accountId);
         }
 
+        [HttpGet("between/{accountId}")]
+        public IEnumerable<ReminderDto> GetBetween(string from, string to, long accountId)
+        {
+            return reminderService.GetRemindersBetween(from, to, accountId);
+        }
+
         [HttpDelete("{reminderId}")]
         public void Delete(long reminderId)
         {

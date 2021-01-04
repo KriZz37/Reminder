@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -16,7 +17,8 @@ export class NewReminderComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private reminderService: ReminderService,
-    private router: Router) { }
+    private router: Router,
+    private datePipe: DatePipe) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -27,8 +29,9 @@ export class NewReminderComponent implements OnInit {
 
   onSubmit(value: NewReminder): void {
     this.error = false;
-    const accountId = localStorage.getItem('userId');
-    value.accountId = accountId != null ? Number(accountId) : 0;
+    value.accountId = Number(localStorage.getItem('userId'));
+    const date = this.datePipe.transform(value.date, 'dd-MM-yyyy');
+    value.date = date == null ? '' : date.toString();
 
     this.reminderService.createReminder(value).subscribe(x => {
       if (x === -1) {

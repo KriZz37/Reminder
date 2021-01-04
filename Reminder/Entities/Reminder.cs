@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,6 +16,8 @@ namespace Reminder.Entities
 
         public long Id { get; set; }
         public string Name { get; set; }
+
+        [Column(TypeName = "date")]
         public DateTime Date { get; set; }
         public ICollection<ReminderComment> Comments { get; set; }
 

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Reminder.Model;
 
 namespace Reminder.Migrations
 {
     [DbContext(typeof(ReminderDbContext))]
-    partial class ReminderDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210103192357_DateFormat")]
+    partial class DateFormat
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

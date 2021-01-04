@@ -73,6 +73,20 @@ namespace Reminder.Services
                     r.Id));
         }
 
+        public IEnumerable<ReminderDto> GetRemindersBetween(string from, string to, long accountId)
+        {
+            var fromDate = DateTime.ParseExact(from, "dd-MM-yyyy", null);
+            var toDate = DateTime.ParseExact(to, "dd-MM-yyyy", null);
+
+            return dbContext.Reminders.Include(x => x.Comments)
+                .Where(x => x.AccountId == accountId && x.Date >= fromDate && x.Date <= toDate)
+                .ToList().OrderBy(x => x.Date).Select(r => new ReminderDto(
+                    r.Name,
+                    r.Date.ToString("dd-MM-yyyy"),
+                    r.Comments.Count,
+                    r.Id));
+        }
+
         public IEnumerable<CommentDto> GetReminderComments(long reminderId)
         {
             return dbContext.Comments.Where(x => x.ReminderId == reminderId)

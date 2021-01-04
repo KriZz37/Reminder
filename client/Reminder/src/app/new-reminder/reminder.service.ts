@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Comment } from '../dashboard/comment-list/comment';
@@ -28,6 +28,14 @@ export class ReminderService {
 
   getAllReminders(accountId: number): Observable<Reminder[]> {
     return this.http.get<Reminder[]>(`https://localhost:5001/api/reminder/${accountId}`);
+  }
+
+  getRemindersBetween(from: string, to: string, accountId: number): Observable<Reminder[]> {
+    let params = new HttpParams();
+    params = params.append('from', from);
+    params = params.append('to', to);
+
+    return this.http.get<Reminder[]>(`https://localhost:5001/api/reminder/between/${accountId}`, {params});
   }
 
   getReminderComments(reminderId: number): Observable<Comment[]> {

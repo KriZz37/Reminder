@@ -1,7 +1,14 @@
 <mat-card-header>
   <mat-card-title>
     <p style="float: left;">Lista przypomnień</p>
-    <h3 style="float: right;">Dzisiejsza data: {{getDate()}}</h3>
+    <div style="float: right;">
+      <h3 *ngIf="showAll">Dzisiejsza data: {{getTodayDate()}}</h3>
+      <h3 *ngIf=" showAll===false">Najbliższy miesiąc: {{getTodayDate()}} - {{getMonthLaterDate()}}</h3>
+      <button style="float: right;" mat-raised-button color="primary" mat-button (click)="changeView()">
+        <span *ngIf="showAll">Najbliższy miesiąc</span>
+        <span *ngIf="showAll === false">Pokaż wszystkie</span>
+      </button>
+    </div>
   </mat-card-title>
 </mat-card-header>
 <mat-card-content>
