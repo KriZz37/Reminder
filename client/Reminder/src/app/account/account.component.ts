@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DataTransferService } from '../dashboard/data-transfer.service';
-import { LoginService } from '../login/login.service';
+import { AuthService } from '../auth/auth.service';
 import { AccountService } from './account.service';
 import { ChangePassword } from './change-password';
 
@@ -20,10 +19,10 @@ export class AccountComponent implements OnInit {
     private accountService: AccountService,
     private router: Router,
     private fb: FormBuilder,
-    private loginService: LoginService) { }
+    private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.accountId = Number(localStorage.getItem('userId'));
+    this.accountId = this.authService.getCurrentUserValue().userId;
 
     this.form = this.fb.group({
       currentPassword: '',
@@ -48,7 +47,7 @@ export class AccountComponent implements OnInit {
   deleteAccount(): void {
     this.accountService.deleteAccount(this.accountId).subscribe(() =>
     {
-      this.loginService.logout();
+      this.authService.logout();
     });
   }
 }

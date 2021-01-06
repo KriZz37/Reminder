@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { AuthService } from 'src/app/auth/auth.service';
 import { ReminderService } from 'src/app/new-reminder/reminder.service';
 import { DataTransferService } from '../data-transfer.service';
 import { Reminder } from './reminder';
@@ -17,10 +18,11 @@ export class ReminderListComponent implements OnInit {
 
   constructor(
     private reminderService: ReminderService,
-    private data: DataTransferService) { }
+    private data: DataTransferService,
+    private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.accountId = Number(localStorage.getItem('userId'));
+    this.accountId = this.authService.getCurrentUserValue().userId;
 
     this.showAll = false;
     this.getNextMonthReminders();

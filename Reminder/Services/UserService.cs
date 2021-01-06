@@ -1,10 +1,13 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using Reminder.Dtos;
 using Reminder.Entities;
 using Reminder.Model;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -72,7 +75,7 @@ namespace Reminder.Services
             var hash = GetHash(data.Password);
             if (account.Password == hash)
             {
-                return new(account.Id, "empty token");
+                return new(account.Id, GenerateToken(account.Login));
             }
 
             return null;
@@ -96,6 +99,26 @@ namespace Reminder.Services
             }
 
             return false;
+        }
+
+        private string GenerateToken(string username)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.UTF8.GetBytes(configuration.GetValue<string>("Security:SecretKey"));
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.Name, username)
+                }),
+                Expires = DateTime.Now.AddMinutes(15),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+
+            return tokenHandler.WriteToken(token);
         }
 
         private string GetHash(string password)

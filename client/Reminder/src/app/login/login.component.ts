@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth/auth.service';
 import { Login } from './login';
-import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private loginService: LoginService) { }
+    private authService: AuthService) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -28,12 +28,11 @@ export class LoginComponent implements OnInit {
   onSubmit(value: Login): void {
     this.inputError = false;
 
-    this.loginService.login(value).subscribe(user => {
+    this.authService.login(value).subscribe(user => {
       if (user) {
-        localStorage.setItem('userId', user.userId.toString());
-        localStorage.setItem('token', user.token);
         this.router.navigate(['/']);
       } else {
+        localStorage.removeItem('currentUser');
         this.inputError = true;
       }
     });

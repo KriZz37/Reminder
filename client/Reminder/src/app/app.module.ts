@@ -13,7 +13,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -29,6 +29,8 @@ import { NewCommentDialogComponent } from './dashboard/new-comment-dialog/new-co
 import { EditReminderDialogComponent } from './dashboard/edit-reminder-dialog/edit-reminder-dialog.component';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { DatePipe } from '@angular/common';
+import { JwtInterceptor } from './interceptors/jwtinterceptor';
+import { ErrorInterceptor } from './interceptors/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -68,7 +70,9 @@ import { DatePipe } from '@angular/common';
   providers: [
     { provide: LOCALE_ID, useValue: 'en-GB' },
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
-    DatePipe
+    DatePipe,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })
